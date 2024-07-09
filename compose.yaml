@@ -1,0 +1,131 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgres-db
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: agilbackend
+      POSTGRES_USER: your_username
+      POSTGRES_PASSWORD: your_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - spring-demo
+    restart: unless-stopped
+
+  eureka-server:
+    image: your_eureka_image
+    container_name: eureka-server
+    environment:
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+      - EUREKA_SERVER_ENABLE_SELF_PRESERVATION=false
+    ports:
+      - 8761:8761
+    networks:
+      - spring-demo
+
+  api-gateway:
+    image: your_api_gateway_image
+    container_name: api-gateway
+    depends_on:
+      - eureka-server
+    ports:
+      - 8080:8080
+    networks:
+      - spring-demo
+
+  gerant-service:
+    image: your_gerant_image
+    container_name: gerant-service
+    depends_on:
+      - postgres
+      - eureka-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
+      - SPRING_DATASOURCE_USERNAME=your_username
+      - SPRING_DATASOURCE_PASSWORD=your_password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    networks:
+      - spring-demo
+
+  commande-service:
+    image: your_commande_image
+    container_name: commande-service
+    depends_on:
+      - postgres
+      - eureka-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
+      - SPRING_DATASOURCE_USERNAME=your_username
+      - SPRING_DATASOURCE_PASSWORD=your_password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    networks:
+      - spring-demo
+
+  reclamation-service:
+    image: your_reclamation_image
+    container_name: reclamation-service
+    depends_on:
+      - postgres
+      - eureka-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
+      - SPRING_DATASOURCE_USERNAME=your_username
+      - SPRING_DATASOURCE_PASSWORD=your_password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    networks:
+      - spring-demo
+
+  intervenant-service:
+    image: your_intervenant_image
+    container_name: intervenant-service
+    depends_on:
+      - postgres
+      - eureka-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
+      - SPRING_DATASOURCE_USERNAME=your_username
+      - SPRING_DATASOURCE_PASSWORD=your_password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    networks:
+      - spring-demo
+
+  utilisateur-service:
+    image: your_utilisateur_image
+    container_name: utilisateur-service
+    depends_on:
+      - postgres
+      - eureka-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
+      - SPRING_DATASOURCE_USERNAME=your_username
+      - SPRING_DATASOURCE_PASSWORD=your_password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    networks:
+      - spring-demo
+
+  etat-commande-service:
+    image: your_etat_commande_image
+    container_name: etat-commande-service
+    depends_on:
+      - postgres
+      - eureka-server
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
+      - SPRING_DATASOURCE_USERNAME=your_username
+      - SPRING_DATASOURCE_PASSWORD=your_password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    networks:
+      - spring-demo
+
+networks:
+  spring-demo:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

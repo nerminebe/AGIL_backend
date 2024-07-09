@@ -1,0 +1,32 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: gerant
+          uri: lb://gerant
+          predicates:
+            - Path=/gerants/**
+        - id: commande
+          uri: lb://commande
+          predicates:
+            - Path=/commandes/**
+        - id: reclamation
+          uri: lb://reclamation
+          predicates:
+            - Path=/reclamations/**
+        - id: produit
+          uri: lb://produit
+          predicates:
+            - Path=/produits/**
+        - id: intervenant
+          uri: lb://intervenant
+          predicates:
+            - Path=/intervenants/**
+        - id: utilisateur
+          uri: lb://utilisateur
+          predicates:
+            - Path=/utilisateurs/**
+        - id: etatCommande
+          uri: lb://etatCommande
+          predicates:
+            - Path=/etatCommandes/**
