@@ -23,12 +23,12 @@ public class Reclamation {
     private String description;
     private Date date;
 
-    @ManyToOne
-    @JoinColumn(name = "responsable")
-    private Utilisateur responsable;
+   // @ManyToOne
+    //@JoinColumn(name = "responsable")
+    //private Utilisateur responsable;
 
-    @ManyToOne
-    @JoinColumn(name = "gerant")
-    private Gerant gerant;
+    //@ManyToOne
+    //@JoinColumn(name = "gerant")
+    //private Gerant gerant;
 
 }

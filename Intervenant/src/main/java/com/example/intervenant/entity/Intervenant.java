@@ -19,10 +19,10 @@ public class Intervenant {
     private String prenom;
     private String type;
 
-    @OneToMany(mappedBy = "intervenant")
-    private List<Commande> commandes;
+    //@OneToMany(mappedBy = "intervenant")
+   // private List<Commande> commandes;
 
-    @OneToMany(mappedBy = "intervenant")
-    private List<Reclamation> reclamations;
+   // @OneToMany(mappedBy = "intervenant")
+    //private List<Reclamation> reclamations;
 
 }

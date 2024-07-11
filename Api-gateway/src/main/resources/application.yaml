@@ -1,32 +1,38 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+       prefer-ip-address: true
+
+  spring:
+  application:
+    name: api-gateway
+
 spring:
   cloud:
     gateway:
       routes:
-        - id: gerant
-          uri: lb://gerant
+        - id: gerant-service
+          uri: lb://gerant-service
           predicates:
-            - Path=/gerants/**
-        - id: commande
-          uri: lb://commande
+            - Path=/gerant/**
+        - id: commande-service
+          uri: lb://commande-service
           predicates:
-            - Path=/commandes/**
-        - id: reclamation
-          uri: lb://reclamation
+            - Path=/commande/**
+        - id: reclamation-service
+          uri: lb://reclamation-service
           predicates:
-            - Path=/reclamations/**
-        - id: produit
-          uri: lb://produit
+            - Path=/reclamation/**
+        - id: intervenant-service
+          uri: lb://intervenant-service
           predicates:
-            - Path=/produits/**
-        - id: intervenant
-          uri: lb://intervenant
+            - Path=/intervenant/**
+        - id: utilisateur-service
+          uri: lb://utilisateur-service
           predicates:
-            - Path=/intervenants/**
-        - id: utilisateur
-          uri: lb://utilisateur
-          predicates:
-            - Path=/utilisateurs/**
-        - id: etatCommande
-          uri: lb://etatCommande
-          predicates:
-            - Path=/etatCommandes/**
+            - Path=/utilisateur/**

@@ -17,7 +17,7 @@ public class EtatCommande {
     @Id
     private String etat;
 
-    @OneToMany(mappedBy = "etatCommande")
-    private List<Commande> commandes;
+   // @OneToMany(mappedBy = "etatCommande")
+   // private List<Commande> commandes;
 
 }

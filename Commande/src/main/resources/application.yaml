@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+ datasource:
+    url: jdbc:postgresql://postgres-db:5432/agilbackend
+    username: your_username
+    password: your_password
+    driver-class-name: org.postgresql.Driver
+ jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+  spring:
+   application:
+    name: commande-service

@@ -25,9 +25,9 @@ public class Gerant {
     private String idStation;
 
 
-    @ManyToOne
-    @JoinColumn(name = "commercial")
-    private User commercial;
+    //@ManyToOne
+    //@JoinColumn(name = "commercial")
+   // private User commercial;
 
     @ManyToOne
     @JoinColumn(name = "idStation")

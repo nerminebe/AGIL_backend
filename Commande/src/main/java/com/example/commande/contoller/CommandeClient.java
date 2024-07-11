@@ -3,6 +3,7 @@ package com.example.commande.contoller;
 import com.example.commande.entity.Commande;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "commande")
 public interface CommandeClient {

@@ -8,26 +8,26 @@ import org.springframework.stereotype.Service;
 public class IntervenantService {
     @Autowired
     private IntervenantRepository intervenantRepository;
-    @Autowired
-    private CommandeClient commandeClient;
+   // @Autowired
+   // private CommandeClient commandeClient;
 
-    public Commande getCommandeById(Long id) {
-        return commandeClient.getCommandeById(id);
-    }
+ //   public Commande getCommandeById(Long id) {
+   //     return commandeClient.getCommandeById(id);
+    //}
 
-    public void traiterCommande() {
+  //  public void traiterCommande() {
         // Logic to process an order
-    }
+   // }
 
-    public void visualiserCommandes() {
+   // public void visualiserCommandes() {
         // Logic to view orders
-    }
+   // }
 
-    public void affecterReclamation() {
+//    public void affecterReclamation() {
         // Logic to assign a complaint
-    }
+  //  }
 
-    public void suivreReclamations() {
+    //public void suivreReclamations() {
         // Logic to track complaints
-    }
+    //}
 }

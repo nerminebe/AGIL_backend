@@ -18,11 +18,8 @@ services:
 
   eureka-server:
     image: your_eureka_image
-    container_name: eureka-server
-    environment:
-      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
-      - EUREKA_CLIENT_FETCH_REGISTRY=false
-      - EUREKA_SERVER_ENABLE_SELF_PRESERVATION=false
+    build:
+      context: ./eureka
     ports:
       - 8761:8761
     networks:
@@ -30,97 +27,74 @@ services:
 
   api-gateway:
     image: your_api_gateway_image
-    container_name: api-gateway
-    depends_on:
-      - eureka-server
+    build:
+      context: ./api-gateway
     ports:
       - 8080:8080
     networks:
       - spring-demo
+    depends_on:
+      - eureka-server
 
   gerant-service:
-    image: your_gerant_image
-    container_name: gerant-service
+    image: your_gerant_service_image
+    build:
+      context: ./gerant
+    ports:
+      - 8081:8081
+    networks:
+      - spring-demo
     depends_on:
       - postgres
       - eureka-server
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
-      - SPRING_DATASOURCE_USERNAME=your_username
-      - SPRING_DATASOURCE_PASSWORD=your_password
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    networks:
-      - spring-demo
 
   commande-service:
-    image: your_commande_image
-    container_name: commande-service
+    image: your_commande_service_image
+    build:
+      context: ./commande
+    ports:
+      - 8082:8082
+    networks:
+      - spring-demo
     depends_on:
       - postgres
       - eureka-server
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
-      - SPRING_DATASOURCE_USERNAME=your_username
-      - SPRING_DATASOURCE_PASSWORD=your_password
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    networks:
-      - spring-demo
 
   reclamation-service:
-    image: your_reclamation_image
-    container_name: reclamation-service
+    image: your_reclamation_service_image
+    build:
+      context: ./reclamation
+    ports:
+      - 8083:8083
+    networks:
+      - spring-demo
     depends_on:
       - postgres
       - eureka-server
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
-      - SPRING_DATASOURCE_USERNAME=your_username
-      - SPRING_DATASOURCE_PASSWORD=your_password
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    networks:
-      - spring-demo
 
   intervenant-service:
-    image: your_intervenant_image
-    container_name: intervenant-service
+    image: your_intervenant_service_image
+    build:
+      context: ./intervenant
+    ports:
+      - 8084:8084
+    networks:
+      - spring-demo
     depends_on:
       - postgres
       - eureka-server
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
-      - SPRING_DATASOURCE_USERNAME=your_username
-      - SPRING_DATASOURCE_PASSWORD=your_password
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    networks:
-      - spring-demo
 
   utilisateur-service:
-    image: your_utilisateur_image
-    container_name: utilisateur-service
+    image: your_utilisateur_service_image
+    build:
+      context: ./utilisateur
+    ports:
+      - 8085:8085
+    networks:
+      - spring-demo
     depends_on:
       - postgres
       - eureka-server
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
-      - SPRING_DATASOURCE_USERNAME=your_username
-      - SPRING_DATASOURCE_PASSWORD=your_password
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    networks:
-      - spring-demo
-
-  etat-commande-service:
-    image: your_etat_commande_image
-    container_name: etat-commande-service
-    depends_on:
-      - postgres
-      - eureka-server
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/agilbackend
-      - SPRING_DATASOURCE_USERNAME=your_username
-      - SPRING_DATASOURCE_PASSWORD=your_password
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
-    networks:
-      - spring-demo
 
 networks:
   spring-demo:
