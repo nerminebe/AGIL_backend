@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      uri: http://config-server:8888
+      fail-fast: true
+  config:
+    import: "configserver:" # This is crucial to import the configurations from the config server
+  gateway:
+    routes:
+      - id: gerant-service
+        uri: lb://gerant-service
+        predicates:
+          - Path=/gerant/**
+      - id: commande-service
+        uri: lb://commande-service
+        predicates:
+          - Path=/commande/**
+      - id: reclamation-service
+        uri: lb://reclamation-service
+        predicates:
+          - Path=/reclamation/**
+      - id: intervenant-service
+        uri: lb://intervenant-service
+        predicates:
+          - Path=/intervenant/**
+      - id: utilisateur-service
+        uri: lb://utilisateur-service
+        predicates:
+          - Path=/utilisateur/**

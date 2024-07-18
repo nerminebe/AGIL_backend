@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiez le fichier JAR de l'application dans le conteneur
-COPY target/api-gateway.jar /app/api-gateway.jar
+COPY target/api-gateway-0.0.1-SNAPSHOT.jar /app/api-gateway.jar
 
 # Exposez le port sur lequel l'application s'exécute
 EXPOSE 8080

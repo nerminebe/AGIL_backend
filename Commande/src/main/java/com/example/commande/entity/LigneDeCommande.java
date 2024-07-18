@@ -24,9 +24,6 @@ public class LigneDeCommande {
     @JoinColumn(name = "idCommande")
     private Commande commande;
 
-   // @ManyToOne
-    //@JoinColumn(name = "produitId")
-    //private Produit produit;
 
 
 }

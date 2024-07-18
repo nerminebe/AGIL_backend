@@ -5,9 +5,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiez le fichier JAR de l'application dans le conteneur
-COPY target/Eureka-0.0.1-SNAPSHOT.jar /app/eureka-server.jar
+COPY target/User-0.0.1-SNAPSHOT.jar /app/User-service.jar
 
 # Exposez le port sur lequel l'application s'exécute
-EXPOSE 8761
+EXPOSE 8087
 
-# Commande pour
+# Commande pour exécuter l'application
+ENTRYPOINT ["java", "-jar", "/app/User-service.jar"]

@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiez le fichier JAR de l'application dans le conteneur
-COPY target/intervenant-service.jar /app/intervenant-service.jar
+COPY target/Intervenant-0.0.1-SNAPSHOT.jar /app/intervenant-service.jar
 
 # Exposez le port sur lequel l'application s'exécute
 EXPOSE 8084

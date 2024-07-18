@@ -23,14 +23,6 @@ public class Commande {
     private int tel;
     private String referenceCommande;
 
-   // @ManyToOne
-  //  @JoinColumn(name = "etatCommande")
-   // private EtatCommande etatCommande;
-
-   // @ManyToOne
-   // @JoinColumn(name = "gerant")
-  //  private Gerant gerant;
-
     @OneToMany(mappedBy = "commande")
     private List<LigneDeCommande> lignesDeCommande;// Getters and setters
 }

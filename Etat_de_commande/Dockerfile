@@ -5,10 +5,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiez le fichier JAR de l'application dans le conteneur
-COPY target/commande-0.0.1-SNAPSHOT.jar /app/commande.jar
+COPY target/Etat_de_commande-0.0.1-SNAPSHOT.jar /app/Etat_de_commande.jar
 
 # Exposez le port sur lequel l'application s'exécute
-EXPOSE 8081
+EXPOSE 8082
 
 # Commande pour exécuter l'application
-ENTRYPOINT ["java", "-jar", "/app/commande.jar"]
+ENTRYPOINT ["java", "-jar", "/app/Etat_de_commande.jar"]

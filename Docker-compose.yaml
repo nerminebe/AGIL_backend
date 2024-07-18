@@ -17,53 +17,41 @@ services:
     restart: unless-stopped
 
   eureka-server:
-    image: your_eureka_image
+    image: eureka-server
     build:
-      context: ./eureka
+      context: ./Eureka
     ports:
       - 8761:8761
     networks:
       - spring-demo
 
-  api-gateway:
-    image: your_api_gateway_image
+  config-server:
+    image: config_server
     build:
-      context: ./api-gateway
+      context: ./config-server
+    ports:
+      - 8888:8888
+    networks:
+      - spring-demo
+    depends_on:
+      - eureka-server
+
+  api-gateway:
+    image: api_gateway_image
+    build:
+      context: ./Api-gateway
     ports:
       - 8080:8080
     networks:
       - spring-demo
     depends_on:
       - eureka-server
+      - config-server
 
   gerant-service:
-    image: your_gerant_service_image
+    image: gerant_service
     build:
-      context: ./gerant
-    ports:
-      - 8081:8081
-    networks:
-      - spring-demo
-    depends_on:
-      - postgres
-      - eureka-server
-
-  commande-service:
-    image: your_commande_service_image
-    build:
-      context: ./commande
-    ports:
-      - 8082:8082
-    networks:
-      - spring-demo
-    depends_on:
-      - postgres
-      - eureka-server
-
-  reclamation-service:
-    image: your_reclamation_service_image
-    build:
-      context: ./reclamation
+      context: ./Gerant
     ports:
       - 8083:8083
     networks:
@@ -71,11 +59,38 @@ services:
     depends_on:
       - postgres
       - eureka-server
+      - config-server
+
+  commande-service:
+    image: commande_service
+    build:
+      context: ./Commande
+    ports:
+      - 8081:8081
+    networks:
+      - spring-demo
+    depends_on:
+      - postgres
+      - eureka-server
+      - config-server
+
+  reclamation-service:
+    image: your_reclamation_service_image
+    build:
+      context: ./Reclamation
+    ports:
+      - 8086:8086
+    networks:
+      - spring-demo
+    depends_on:
+      - postgres
+      - eureka-server
+      - config-server
 
   intervenant-service:
     image: your_intervenant_service_image
     build:
-      context: ./intervenant
+      context: ./Intervenant
     ports:
       - 8084:8084
     networks:
@@ -83,11 +98,12 @@ services:
     depends_on:
       - postgres
       - eureka-server
+      - config-server
 
-  utilisateur-service:
-    image: your_utilisateur_service_image
+  produit-service:
+    image: your_produit_service_image
     build:
-      context: ./utilisateur
+      context: ./Produit
     ports:
       - 8085:8085
     networks:
@@ -95,6 +111,33 @@ services:
     depends_on:
       - postgres
       - eureka-server
+      - config-server
+
+  utilisateur-service:
+    image: user_service_image
+    build:
+      context: ./User
+    ports:
+      - 8087:8087
+    networks:
+      - spring-demo
+    depends_on:
+      - postgres
+      - eureka-server
+      - config-server
+
+  etat_de_commande-service:
+    image: etat_de_commande_service
+    build:
+      context: ./Etat_de_commande
+    ports:
+      - 8082:8082
+    networks:
+      - spring-demo
+    depends_on:
+      - postgres
+      - eureka-server
+      - config-server
 
 networks:
   spring-demo:

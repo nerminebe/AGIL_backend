@@ -5,10 +5,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiez le fichier JAR de l'application dans le conteneur
-COPY target/gerant-service.jar /app/gerant-service.jar
+COPY target/Gerant-0.0.1-SNAPSHOT.jar /app/gerant-service.jar
 
 # Exposez le port sur lequel l'application s'exécute
-EXPOSE 8081
+EXPOSE 8083
 
 # Commande pour exécuter l'application
 ENTRYPOINT ["java", "-jar", "/app/gerant-service.jar"]
